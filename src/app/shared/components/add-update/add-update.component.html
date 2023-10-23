@@ -1,0 +1,100 @@
+<app-header [isModal]="true" [title]="reporte ? 'Actualizar producto' : 'Agregar producto' "></app-header>
+<ion-content>
+
+    <form [formGroup]="form" class="ion-padding" (ngSubmit)="submit()" (keypress.enter)="submit()">
+
+<!-- Carga de imagen-->
+<ion-avatar *ngIf="form.value.Imagen">
+    <img [src]="form.value.Imagen" />
+</ion-avatar>
+
+<!-- Carga de cuando no hay imagen-->
+<ion-icon class="image-icon" *ngIf="!form.value.Imagen" name="image-outline"></ion-icon>
+<br>
+<!-- CAPTURA Imagen/Camara-->
+<ion-button (click)="takeImage()" mode ="ios" size="small" shape="round">
+    Suba una imagen de la falla vial
+</ion-button>
+
+<!-- Casilla de Direccion-->
+<app-custom-input
+autocomplete="name"
+icon="navigate-circle-outline"
+[control]="form.controls.Direccion"
+type="text"
+label="Ingresa la direccion donde se encuentra la falla"
+></app-custom-input>
+<div class="validators" *ngIf="form.controls.Direccion.errors && form.controls.Direccion.touched">
+<div *ngIf="form.controls.Direccion.errors?.['required']">Ingrese la direccion donde se encuentra la falla</div>
+<div *ngIf="form.controls.Direccion.errors?.['minlenght']">Ingrese completa la direccion</div>
+</div>
+
+<!-- Casilla de Barrio-->
+<app-custom-input
+autocomplete="name"
+icon="map-outline"
+[control]="form.controls.Barrio"
+type="text"
+label="Ingresa el Barrio donde se encuentra la falla"
+></app-custom-input>
+<div class="validators" *ngIf="form.controls.Barrio.errors && form.controls.Barrio.touched">
+<div *ngIf="form.controls.Barrio.errors?.['required']">Ingrese el Barrio donde se encuentra la falla</div>
+<div *ngIf="form.controls.Barrio.errors?.['minlenght']">Ingrese completa la Barrio</div>
+</div>
+        
+<!-- Casilla de Localidad-->
+<app-custom-input
+autocomplete="name"
+icon="storefront-outline"
+[control]="form.controls.Localidad"
+type="text"
+label="Ingresa la Localidad donde se encuentra la falla"
+></app-custom-input>
+<div class="validators" *ngIf="form.controls.Localidad.errors && form.controls.Localidad.touched">
+<div *ngIf="form.controls.Localidad.errors?.['required']">Ingrese la Localidad donde se encuentra la falla</div>
+<div *ngIf="form.controls.Localidad.errors?.['minlenght']">Ingrese completa la Localidad</div>
+</div>
+
+
+
+<!-- option value="">-</option>
+                                            <option value="Usaquén</option>
+                                            <option value="Chapinero">Chapinero</option>
+                                            <option value="Santa Fe">Santa Fe</option>
+                                            <option value="San Cristóbal">San Cristóbal</option>
+                                            <option value="Usme">Usme</option>
+                                            <option value="Tunjuelito">Tunjuelito</option>
+                                            <option value="Bosa">Bosa</option>
+                                            <option value="Kennedy">Kennedy</option>
+                                            <option value="Engativá">Engativá</option>
+                                            <option value="Suba">Suba</option>
+                                            <option value="Barrios Unidos">Barrios Unidos</option>
+                                            <option value="Teusaquillo">Teusaquillo</option>
+                                            <option value="Los Mártires">Los Mártires</option>
+                                            <option value="Antonio Nariño">Antonio Nariño</option>
+                                            <option value="Rafael Uribe Uribe">Rafael Uribe Uribe</option>
+                                            <option value="Ciudad Bolívar">Ciudad Bolívar</option>
+                                            <option value="Sumapaz">Sumapaz</option>-->
+
+
+<!-- Casilla de Descripcion-->
+<app-custom-input
+autocomplete="name"
+icon="clipboard-outline"
+[control]="form.controls.Descripcion"
+type="text"
+label="Ingresa la Descripcion donde se encuentra la falla"
+></app-custom-input>
+<div class="validators" *ngIf="form.controls.Descripcion.errors && form.controls.Descripcion.touched">
+<div *ngIf="form.controls.Descripcion.errors?.['required']">Ingrese la Descripcion de la falla</div>
+<div *ngIf="form.controls.Descripcion.errors?.['minlenght']">Ingrese completa la Descripcion</div>
+</div>
+
+<!-- Boton registro/Actualizar-->
+<ion-button mode="ios" class="ion-margin" type="submit" [disabled]="form.invalid" >
+{{reporte ? 'Actualizar Reporte' : 'Generar reporte'}}
+<ion-icon slot="end" name="hammer-outline"></ion-icon>
+</ion-button>
+
+    </form>
+</ion-content>
